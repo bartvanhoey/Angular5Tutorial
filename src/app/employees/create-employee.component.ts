@@ -7,7 +7,7 @@ import { NgForm } from '@angular/forms';
   styleUrls: ['./create-employee.component.css']
 })
 export class CreateEmployeeComponent implements OnInit {
-  
+
   constructor() { }
 
   ngOnInit() {
@@ -15,6 +15,5 @@ export class CreateEmployeeComponent implements OnInit {
 
   saveEmployee(employeeForm: NgForm): void {
     console.log('employeeForm: ' ,  employeeForm.value);
-    console.log('employeeForm: ' ,  employeeForm);
   }
 }
