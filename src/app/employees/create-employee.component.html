@@ -1,16 +1,52 @@
-<form #employeeForm="ngForm" (ngSubmit)='saveEmployee(employeeForm)'  >
+<form #employeeForm="ngForm" (ngSubmit)='saveEmployee(employeeForm)'>
   <div class="card">
     <div class="card-header">
       Create Employee
     </div>
+    <!-- Full Name -->
     <div class="card-body">
       <div class="form-group">
         <label for="fullName">Full Name</label>
         <input [(ngModel)]="fullname" type="text" name="fullName" id="fullName" class="form-control" placeholder="Enter full name ...">
       </div>
+      <!-- Email -->
       <div class="form-group">
         <label for="email">Email</label>
-        <input [(ngModel)]="email" type="email" name="email" id="email" class="form-control" placeholder="Enter email ..." aria-describedby="">
+        <input [(ngModel)]="email" type="email" name="email" id="email" class="form-control" placeholder="Enter email ...">
+      </div>
+      <!-- Phone Number -->
+      <div class="form-group">
+        <label for="phoneNumber">Phone Number</label>
+        <input [(ngModel)]="phoneNumber" type="text" name="phoneNumber" id="phoneNumber" class="form-control"
+          placeholder="Enter phone number ...">
+      </div>
+      <!-- Contact Preference -->
+      <div class="form-group">
+        <div class="form-check-inline"><label>Contact Preference?</label></div>
+        <div class="form-check-inline">
+          <label class="form-check-label">
+            <input [(ngModel)]="contactPref" type="radio" class="form-check-input" value="email" name="contactPref">Email
+          </label>
+        </div>
+        <div class="form-check-inline">
+          <label class="form-check-label">
+            <input [(ngModel)]="contactdPref" type="radio" class="form-check-input" value="phone" name="contactPref">Phone
+          </label>
+        </div>
+      </div>
+      <!-- Gender -->
+      <div class="form-group">
+        <div class="form-check-inline"><label>Gender</label></div>
+        <div class="form-check-inline">
+          <label class="form-check-label">
+            <input [(ngModel)]="gender" type="radio" class="form-check-input" value="male" name="gender">Male
+          </label>
+        </div>
+        <div class="form-check-inline">
+          <label class="form-check-label">
+            <input [(ngModel)]="gender" type="radio" class="form-check-input" value="female" name="gender">Female
+          </label>
+        </div>
       </div>
     </div>
     <div class="card-footer text-muted">
