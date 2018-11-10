@@ -58,10 +58,7 @@
     <div class="form-group col-md-4">
         <label for="department">Department</label>
         <select id="department" name="department" [(ngModel)]="department" class="form-control">
-          <option value="1">Helpdesk</option>
-          <option value="2">HR</option>
-          <option value="3">IT</option>
-          <option value="4">Payroll</option>
+          <option *ngFor="let department of departments" [value]="department.id" >{{department.name}}</option>
         </select>
       </div>
     <div class="card-footer text-muted">
