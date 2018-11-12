@@ -49,23 +49,28 @@
         </div>
       </div>
       <!-- IsActive -->
-      <div class="form-check-inline">
-        <input [(ngModel)]="isActive" type="checkbox" name="isActive" class="form-check-input" id="isActive">
-        <label class="form-check-label" for="isActive">Is Active?</label>
-      </div>
+        <div class="form-check-inline">
+          <input [(ngModel)]="isActive" type="checkbox" name="isActive" class="form-check-input" id="isActive">
+          <label class="form-check-label" for="isActive">Is Active?</label>
+        </div>
 
       <!-- Department -->
-      <div class="form-group">
-        <label for="department">Department</label>
-        <select id="department" name="department" [(ngModel)]="department" class="form-control col-md-4">
-          <option *ngFor="let department of departments" [value]="department.id">{{department.name}}</option>
-        </select>
+      <div class="row">
+        <div class="form-group col-md-4">
+          <label for="department">Department</label>
+          <select id="department" name="department" [(ngModel)]="department" class="form-control">
+            <option *ngFor="let department of departments" [value]="department.id">{{department.name}}</option>
+          </select>
+        </div>
       </div>
 
       <!-- Date Of Birth -->
-      <div class="form-group">
-        <label for="dateOfBirth">Date Of Birth</label>
-        <input [(ngModel)]="dateOfBirth" type="text" bsDatepicker name="dateOfBirth" id="dateOfBirth" class="form-control">
+      <div class="row">
+        <div class="form-group col-md-4">
+          <label for="dateOfBirth">Date Of Birth</label>
+          <input [(ngModel)]="dateOfBirth" type="text" bsDatepicker [bsConfig]="datePickerConfig" placement="right" name="dateOfBirth" id="dateOfBirth"
+            class="form-control">
+        </div>
       </div>
     </div>
     <div class="card-footer text-muted">
