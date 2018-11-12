@@ -12,6 +12,7 @@ import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
 export class CreateEmployeeComponent implements OnInit {
   dateOfBirth: Date = new Date(2018, 0, 30);
   datePickerConfig: Partial<BsDatepickerConfig>;
+  previewPhoto = false;
   departments: Department[] = [
     { id: 1, name: 'Helpdesk' },
     { id: 2, name: 'HR' },
@@ -20,7 +21,7 @@ export class CreateEmployeeComponent implements OnInit {
     { id: 5, name: 'Administration' }
   ];
 
-  constructor() { 
+  constructor() {
     this.datePickerConfig = Object.assign({}, {
       containerClass: 'theme-dark-blue',
       showWeekNumbers: false,
@@ -28,6 +29,10 @@ export class CreateEmployeeComponent implements OnInit {
       maxDate: new Date(2018, 11, 31),
       dateInputFormat: 'DD/MM/YYYY',
     });
+  }
+
+  togglePreview() {
+    this.previewPhoto = !this.previewPhoto;
   }
 
   ngOnInit() {
