@@ -6,9 +6,10 @@
     <!-- Full Name -->
     <div class="card-body">
       <div class="form-group">
-        <label for="fullName">Full Name</label>
-        <input required [(ngModel)]="fullName" #fullNameCtrl="ngModel" type="text" name="fullName" id="fullName" class="form-control"
-          placeholder="Enter full name ...">
+        <label for="fullName" [class.text-danger]="fullNameCtrl.invalid && fullNameCtrl.touched" [class.text-success]="fullNameCtrl.valid">Full Name</label>
+        <input required [(ngModel)]="fullName" #fullNameCtrl="ngModel" type="text" name="fullName" id="fullName" class="form-control" placeholder="Enter full name ..." [class.is-invalid]="fullNameCtrl.invalid && fullNameCtrl.touched" [class.is-valid]="fullNameCtrl.valid">
+        <span class="invalid-feedback">Full name is a required field</span>
+        <span class="valid-feedback">Correct input</span>
       </div>
       <!-- Email -->
       <div class="form-group">
@@ -89,7 +90,7 @@
 
     </div>
     <div class="card-footer text-muted">
-      <button type="submit" class="btn btn-primary">Save</button>
+      <button type="submit" class="btn btn-primary" [disabled]="employeeForm.invalid" >Save</button>
     </div>
   </div>
 </form>
@@ -143,4 +144,3 @@
     </td>
   </tr>
 </table>
-
