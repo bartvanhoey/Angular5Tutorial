@@ -6,16 +6,29 @@
     <!-- Full Name -->
     <div class="card-body">
       <div class="form-group">
-        <label for="name" [class.text-danger]="name.invalid && name.touched" [class.text-success]="name.valid">Full Name</label>
-        <input required [(ngModel)]="employee.name" #name="ngModel"  type="text" name="name" id="name" class="form-control" placeholder="Enter full name ..." [class.is-invalid]="name.invalid && name.touched" [class.is-valid]="name.valid">
+        <!-- <label [class.text-danger]="name.invalid && name.touched" [class.text-success]="name.valid"  for="name">Full
+          Name</label> -->
+        <label class="control-label" for="name">Full
+          Name</label>
+        <input [class.is-valid]="name.valid" [class.is-invalid]='name.invalid && name.touched' required [(ngModel)]="employee.name"
+          #name="ngModel" type="text" name="name" id="name" class="form-control" placeholder="Enter full name ...">
         <span class="invalid-feedback">Full name is a required field</span>
-        <span class="valid-feedback">Correct input</span>
+        <span class='valid-feedback'>Full name is valid</span>
       </div>
       <!-- Email -->
       <div class="form-group">
-        <label for="email">Email</label>
-        <input required [(ngModel)]="employee.email" type="email" name="email" id="email" class="form-control" placeholder="Enter email ...">
+        <label [class.text-danger]='email.invalid && email.touched' [class.text-success]='email.valid' for="email">Email</label>
+        <input [class.is-valid]='email.valid' [class.is-invalid]='email.invalid && email.touched' #email="ngModel"
+          required email [(ngModel)]="employee.email" type="email" name="email" id="email" class="form-control"
+          placeholder="Enter email ...">
+        <span class="invalid-feedback" *ngIf="email.errors?.email">Email is invalid</span>
+        <span class="invalid-feedback" *ngIf="email.errors?.required">Email is a required field</span>
+        <span class='valid-feedback'>Email is valid</span>
       </div>
+      email valid: {{email.errors.email | json}}
+      <br>
+      email required: {{email.errors.required}}
+      <br>
       <!-- Phone Number -->
       <div class="form-group">
         <label for="phoneNumber">Phone Number</label>
@@ -78,7 +91,8 @@
       <!-- Photopath -->
       <div class="form-group">
         <label for="photoPath">Photo path</label>
-        <input [(ngModel)]="employee.photoPath" type="text" name="photoPath" id="photoPath" class="form-control" placeholder="Enter photo path ...">
+        <input [(ngModel)]="employee.photoPath" type="text" name="photoPath" id="photoPath" class="form-control"
+          placeholder="Enter photo path ...">
       </div>
       <div class="form-group">
         <button type="button" class="btn btn-primary" (click)='togglePreview()'> {{previewPhoto ? 'Hide Preview' :
@@ -90,7 +104,7 @@
 
     </div>
     <div class="card-footer text-muted">
-      <button type="submit" class="btn btn-primary" [disabled]="employeeForm.invalid" >Save</button>
+      <button type="submit" class="btn btn-primary" [disabled]="employeeForm.invalid">Save</button>
     </div>
   </div>
 </form>
