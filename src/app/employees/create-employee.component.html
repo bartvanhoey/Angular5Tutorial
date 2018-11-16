@@ -16,18 +16,21 @@
         <span class='valid-feedback'>Full name is valid</span>
       </div>
       <!-- Email -->
+      <!-- regular expression for email -> "^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$" -->
+      <!-- regular expression for email specific domain -> "^[a-zA-Z0-9_.+-]+@(?:(?:[a-zA-Z0-9-]+\.)?[a-zA-Z]+\.)?(pragimtech)\.com$" -->
       <div class="form-group">
         <label [class.text-danger]='email.invalid && email.touched' [class.text-success]='email.valid' for="email">Email</label>
         <input [class.is-valid]='email.valid' [class.is-invalid]='email.invalid && email.touched' #email="ngModel"
-          required email [(ngModel)]="employee.email" type="email" name="email" id="email" class="form-control"
+          required pattern="^[a-zA-Z0-9_.+-]+@(?:(?:[a-zA-Z0-9-]+\.)?[a-zA-Z]+\.)?(pragimtech)\.com$" [(ngModel)]="employee.email" type="email" name="email" id="email" class="form-control"
           placeholder="Enter email ...">
-        <span class="invalid-feedback" *ngIf="email.errors?.email">Email is invalid</span>
+        <span class="invalid-feedback" *ngIf="email.errors?.pattern">Email is invalid</span>
         <span class="invalid-feedback" *ngIf="email.errors?.required">Email is a required field</span>
         <span class='valid-feedback'>Email is valid</span>
       </div>
-      email valid: {{email.errors.email | json}}
+      email valid: {{email.errors?.pattern | json}}
       <br>
-      email required: {{email.errors.required}}
+      email required: {{email.errors?.required | json}}
+      <br>
       <br>
       <!-- Phone Number -->
       <div class="form-group">
