@@ -19,8 +19,8 @@
       <div class="form-group">
         <label [class.text-danger]='email.invalid' [class.text-success]='email.valid && email.touched' for="email">Email</label>
         <input [class.is-valid]='email.valid && email.touched' [class.is-invalid]='email.invalid' #email="ngModel"
-          [required]="contact.value ==='email'" pattern="^[a-zA-Z0-9_.+-]+@(?:(?:[a-zA-Z0-9-]+\.)?[a-zA-Z]+\.)?(pragimtech)\.com$" [(ngModel)]="employee.email"
-          type="email" name="email" id="email" class="form-control" placeholder="Enter email ...">
+          [required]="contact.value ==='email'" pattern="^[a-zA-Z0-9_.+-]+@(?:(?:[a-zA-Z0-9-]+\.)?[a-zA-Z]+\.)?(pragimtech)\.com$"
+          [(ngModel)]="employee.email" type="email" name="email" id="email" class="form-control" placeholder="Enter email ...">
         <span class="invalid-feedback" *ngIf="email.errors?.pattern">Email is invalid</span>
         <span class="invalid-feedback" *ngIf="email.errors?.required">Email is a required field</span>
         <span class='valid-feedback'>Email is valid</span>
@@ -28,24 +28,27 @@
 
       <!-- Phone Number -->
       <div class="form-group">
-        <label [class.text-danger]='phoneNumber.invalid' [class.text-success]='phoneNumber.valid && phoneNumber.touched' for="phoneNumber">Phone Number</label>
-        <input [class.is-valid]='phoneNumber.valid && phoneNumber.touched' [class.is-invalid]='phoneNumber.invalid' [required]="contact.value === 'phone'" #phoneNumber="ngModel" [(ngModel)]="employee.phoneNumber" type="text" name="phoneNumber" id="phoneNumber" class="form-control" placeholder="Enter phone number ...">
+        <label [class.text-danger]='phoneNumber.invalid' [class.text-success]='phoneNumber.valid && phoneNumber.touched'
+          for="phoneNumber">Phone Number</label>
+        <input [class.is-valid]='phoneNumber.valid && phoneNumber.touched' [class.is-invalid]='phoneNumber.invalid'
+          [required]="contact.value === 'phone'" #phoneNumber="ngModel" [(ngModel)]="employee.phoneNumber" type="text"
+          name="phoneNumber" id="phoneNumber" class="form-control" placeholder="Enter phone number ...">
         <span class='invalid-feedback'>Phone number is a required field</span>
         <span class='valid-feedback'>Phone number is valid</span>
       </div>
 
       <!-- Contact Preference -->
       <div class="form-group">
-        <div class="custom-control-inline"><label [class.text-danger]='contact.invalid && contact.touched'>Contact Preference?</label></div>
+        <div class="custom-control-inline"><label [class.text-success]='contact.valid' [class.text-danger]='contact.invalid && contact.touched'>Contact
+            Preference?</label></div>
         <div class="custom-control custom-radio custom-control-inline">
-          <input [class.is-invalid]='contact.invalid && contact.touched' #contact="ngModel" required
-            [(ngModel)]="employee.contactPreference" type="radio" class="custom-control-input" value="email" name="contactPref"
-            id="emailContact">
+          <input [class.is-invalid]='contact.invalid && contact.touched' #contact="ngModel" required [(ngModel)]="employee.contactPreference"
+            type="radio" class="custom-control-input" value="email" name="contactPref" id="emailContact">
           <label for='emailContact' class='custom-control-label'>Email</label>
         </div>
         <div class="custom-control custom-radio custom-control-inline">
-          <input  [class.is-invalid]='contact.invalid && contact.touched' #contact="ngModel" required [(ngModel)]="employee.contactPreference" type="radio" class="custom-control-input"
-            value="phone" name="contactPref" id="phoneContact">
+          <input [class.is-invalid]='contact.invalid && contact.touched' #contact="ngModel" required [(ngModel)]="employee.contactPreference"
+            type="radio" class="custom-control-input" value="phone" name="contactPref" id="phoneContact">
           <label for='phoneContact' class='custom-control-label'>Phone</label>
           <span class='invalid-feedback'>&nbsp; &nbsp; Contact Preference is a required field</span>
           <br>
@@ -54,7 +57,7 @@
 
       <!-- Gender -->
       <div class="form-group">
-        <div class="custom-control-inline"><label [class.text-danger]='gender.invalid && gender.touched'>Gender</label></div>
+        <div class="custom-control-inline"><label [class.text-success]='gender.valid' [class.text-danger]='gender.invalid && gender.touched'>Gender</label></div>
         <div class="custom-control custom-radio custom-control-inline">
           <input [class.is-invalid]="gender.invalid && gender.touched" #gender="ngModel" type="radio" required id="male"
             name="gender" value="Male" [(ngModel)]="employee.gender" class="custom-control-input">
@@ -69,11 +72,14 @@
       </div>
 
       <!-- IsActive -->
-      <div class="form-check-inline">
-        <input [(ngModel)]="employee.isActive" type="checkbox" name="isActive" class="form-check-input" id="isActive">
-        <label class="form-check-label" for="isActive">Is Active?</label>
+      <div class="custom-control custom-checkbox">
+        <input [class.is-invalid]='isActive.invalid && isActive.touched' #isActive="ngModel" [required]="isActive == null" [(ngModel)]="employee.isActive" type="checkbox" name="isActive" class="custom-control-input" id="isActive">
+        <label  [class.text-success]='isActive.valid && isActive.touched' [class.text-danger]='isActive.invalid && isActive.touched' class="custom-control-label" for="isActive">Is Active?</label>
+        <span class='invalid-feedback'>Is Active is a required field</span>
       </div>
+      <br>
 
+     
       <!-- Department -->
       <div class="row">
         <div class="form-group col-md-4">
