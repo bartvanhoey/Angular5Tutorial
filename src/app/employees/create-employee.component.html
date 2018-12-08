@@ -19,7 +19,7 @@
       <div class="form-group">
         <label [class.text-danger]='email.invalid' [class.text-success]='email.valid && email.touched' for="email">Email</label>
         <input [class.is-valid]='email.valid && email.touched' [class.is-invalid]='email.invalid' #email="ngModel"
-          [required]="contact.value ==='email'" pattern="^[a-zA-Z0-9_.+-]+@(?:(?:[a-zA-Z0-9-]+\.)?[a-zA-Z]+\.)?(pragimtech)\.com$"
+          [required]="contact.value ==='email'" pattern="^[a-zA-Z0-9_.+-]+@(?:(?:[a-zA-Z0-9-]+\.)?[a-zA-Z]+\.)?(hotmail)\.com$"
           [(ngModel)]="employee.email" type="email" name="email" id="email" class="form-control" placeholder="Enter email ...">
         <span class="invalid-feedback" *ngIf="email.errors?.pattern">Email is invalid</span>
         <span class="invalid-feedback" *ngIf="email.errors?.required">Email is a required field</span>
@@ -83,8 +83,9 @@
       <!-- Department -->
       <div class="row">
         <div class="form-group col-md-4">
-          <label for="department">Department</label>
-          <select id="department" name="department" [(ngModel)]="employee.department" class="form-control">
+          <label [class.text-success]='department.valid && department.touched' [class.text-danger]='isActive.invalid && isActive.touched' for="department">Department</label>
+          <select [class.is-invalid]='department.invalid && department.touched' required #department="ngModel" id="department" name="department" [(ngModel)]="employee.department" class="form-control">
+            <option value="-1" >Select department ...</option>
             <option *ngFor="let department of departments" [value]="department.id">{{department.name}}</option>
           </select>
         </div>
