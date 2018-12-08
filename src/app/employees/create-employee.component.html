@@ -84,12 +84,13 @@
       <!-- Department -->
       <div class="row">
         <div class="form-group col-md-4">
-          <label [class.text-success]='department.valid && department.touched' [class.text-danger]='department.invalid && department.touched'
+          <label [class.text-success]='department.valid && department.touched' [class.text-danger]='department.errors?.defaultSelected && department.touched'
             for="department">Department</label>
-          <select [class.is-invalid]='department.invalid && department.touched'  [class.is-valid]='department.valid && department.touched' required #department="ngModel" id="department"
+          <select appSelectValidator [class.is-invalid]='department.errors?.defaultSelected && department.touched'
+            [class.is-valid]='department.valid && department.touched' #department="ngModel" id="department"
             name="department" [(ngModel)]="employee.department" class="form-control">
             <!-- <option disabled [ngValue]="null">Select department ...</option> -->
-            <option [ngValue]="null">Select department ...</option>
+            <option [value]="-1">Select department ...</option>
             <option *ngFor="let department of departments" [value]="department.id">{{department.name}}</option>
             <!-- <option *ngFor="let department of departments" [ngValue]="department">{{department.name}}</option> -->
           </select>
