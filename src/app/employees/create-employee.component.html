@@ -73,21 +73,28 @@
 
       <!-- IsActive -->
       <div class="custom-control custom-checkbox">
-        <input [class.is-invalid]='isActive.invalid && isActive.touched' #isActive="ngModel" [required]="isActive == null" [(ngModel)]="employee.isActive" type="checkbox" name="isActive" class="custom-control-input" id="isActive">
-        <label  [class.text-success]='isActive.valid && isActive.touched' [class.text-danger]='isActive.invalid && isActive.touched' class="custom-control-label" for="isActive">Is Active?</label>
+        <input [class.is-invalid]='isActive.invalid && isActive.touched' #isActive="ngModel" [required]="isActive == null"
+          [(ngModel)]="employee.isActive" type="checkbox" name="isActive" class="custom-control-input" id="isActive">
+        <label [class.text-success]='isActive.valid && isActive.touched' [class.text-danger]='isActive.invalid && isActive.touched'
+          class="custom-control-label" for="isActive">Is Active?</label>
         <span class='invalid-feedback'>Is Active is a required field</span>
       </div>
       <br>
 
-     
       <!-- Department -->
       <div class="row">
         <div class="form-group col-md-4">
-          <label [class.text-success]='department.valid && department.touched' [class.text-danger]='isActive.invalid && isActive.touched' for="department">Department</label>
-          <select [class.is-invalid]='department.invalid && department.touched' required #department="ngModel" id="department" name="department" [(ngModel)]="employee.department" class="form-control">
-            <option value="-1" >Select department ...</option>
+          <label [class.text-success]='department.valid && department.touched' [class.text-danger]='department.invalid && department.touched'
+            for="department">Department</label>
+          <select [class.is-invalid]='department.invalid && department.touched'  [class.is-valid]='department.valid && department.touched' required #department="ngModel" id="department"
+            name="department" [(ngModel)]="employee.department" class="form-control">
+            <!-- <option disabled [ngValue]="null">Select department ...</option> -->
+            <option [ngValue]="null">Select department ...</option>
             <option *ngFor="let department of departments" [value]="department.id">{{department.name}}</option>
+            <!-- <option *ngFor="let department of departments" [ngValue]="department">{{department.name}}</option> -->
           </select>
+          <span class='invalid-feedback'>Department is a required field</span>
+          <span class='valid-feedback'>Department is valid</span>
         </div>
       </div>
 
