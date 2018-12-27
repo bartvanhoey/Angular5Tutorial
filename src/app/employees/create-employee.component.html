@@ -6,9 +6,8 @@
     <!-- Full Name -->
     <div class="card-body">
       <div class="form-group">
-        <!-- <label [class.text-danger]="name.invalid && name.touched" [class.text-success]="name.valid"  for="name">Full
-          Name</label> -->
-        <label class="control-label" for="name">Full Name</label>
+        <label [class.text-danger]="name.invalid && name.touched" [class.text-success]="name.valid" for="name">Full
+          Name</label>
         <input [class.is-valid]="name.valid" [class.is-invalid]='name.invalid && name.touched' required [(ngModel)]="employee.name"
           #name="ngModel" type="text" name="name" id="name" class="form-control" placeholder="Enter full name ...">
         <span class="invalid-feedback">Full name is a required field</span>
@@ -87,8 +86,8 @@
           <label [class.text-success]='department.valid && department.touched' [class.text-danger]='department.errors?.defaultSelected && department.touched'
             for="department">Department</label>
           <select appSelectValidator="select" [class.is-invalid]='department.errors?.defaultSelected && department.touched'
-            [class.is-valid]='department.valid && department.touched' #department="ngModel" id="department"
-            name="department" [(ngModel)]="employee.department" class="form-control">
+            [class.is-valid]='department.valid && department.touched' #department="ngModel" id="department" name="department"
+            [(ngModel)]="employee.department" class="form-control">
             <!-- <option disabled [ngValue]="null">Select department ...</option> -->
             <option value="select">Select department ...</option>
             <option *ngFor="let department of departments" [value]="department.id">{{department.name}}</option>
@@ -120,6 +119,28 @@
       </div>
       <div class="form-group">
         <img [src]="employee.photoPath" height="200" width="200" *ngIf="previewPhoto">
+      </div>
+
+      <!-- Password -->
+      <div class="form-group">
+        <label [class.text-success]='password.valid' [class.text-danger]='password.invalid && password.touched' for="password">Password</label>
+        <input [class.is-valid]='password.valid && password.touched' [class.is-invalid]='password.invalid && password.touched'
+          type="text" name="password" required class="form-control" [(ngModel)]="employee.password" #password="ngModel">
+        <span class='invalid-feedback'>Password is invalid</span>
+        <span class='valid-feedback'>Password is valid</span>
+      </div>
+
+      <!-- Confirm Password -->
+      <div class="form-group">
+        <label [class.text-success]='confirmPassword.valid' [class.text-danger]='confirmPassword.invalid && confirmPassword.touched'
+          for="confirmPassword">Confirm
+          Password</label>
+        <input [class.is-valid]='confirmPassword.valid && confirmPassword.touched' [class.is-invalid]='(confirmPassword.invalid || confirmPassword.errors?.notEqual) && confirmPassword.touched '
+          type="text" name="confirmPassword" appConfirmEqualValidator="password" required class="form-control" [(ngModel)]="employee.confirmPassword"
+          #confirmPassword="ngModel">
+        <span *ngIf="!confirmPassword.errors?.notEqual" class='invalid-feedback'>Confirm Password is invalid</span>
+        <span *ngIf="confirmPassword.errors?.notEqual" class='invalid-feedback'>Password and Confirm Password are not equal</span>
+        <span class='valid-feedback'>Confirm Password is valid</span>
       </div>
 
     </div>
