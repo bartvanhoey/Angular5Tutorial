@@ -121,26 +121,28 @@
         <img [src]="employee.photoPath" height="200" width="200" *ngIf="previewPhoto">
       </div>
 
-      <!-- Password -->
-      <div class="form-group">
-        <label [class.text-success]='password.valid' [class.text-danger]='password.invalid && password.touched' for="password">Password</label>
-        <input [class.is-valid]='password.valid && password.touched' [class.is-invalid]='password.invalid && password.touched'
-          type="text" name="password" required class="form-control" [(ngModel)]="employee.password" #password="ngModel">
-        <span class='invalid-feedback'>Password is invalid</span>
-        <span class='valid-feedback'>Password is valid</span>
-      </div>
+      <div ngModelGroup="passwordGroup" [class.is-invalid]='(confirmPassword.invalid || confirmPassword.errors?.notEqual) && confirmPassword.touched'>
+        <!-- Password -->
+        <div class="form-group">
+          <label [class.text-success]='password.valid' [class.text-danger]='password.invalid && password.touched || (confirmPassword.invalid && confirmPassword.touched )' for="password">Password</label>
+          <input (change)="confirmPassword.control.updateValueAndValidity()" [class.is-valid]='password.valid && password.touched' [class.is-invalid]='password.invalid && password.touched || ((confirmPassword.invalid || confirmPassword.errors?.notEqual) && confirmPassword.touched && confirmPassword.errors?.notEqual)'
+            type="text" name="password" required class="form-control" [(ngModel)]="employee.password" #password="ngModel">
+          <span *ngIf="!confirmPassword.errors?.notEqual"  class='invalid-feedback'>Password is invalid</span>
+          <span *ngIf="!confirmPassword.errors?.notEqual" class='valid-feedback'>Password is valid</span>
+        </div>
 
-      <!-- Confirm Password -->
-      <div class="form-group">
-        <label [class.text-success]='confirmPassword.valid' [class.text-danger]='confirmPassword.invalid && confirmPassword.touched'
-          for="confirmPassword">Confirm
-          Password</label>
-        <input [class.is-valid]='confirmPassword.valid && confirmPassword.touched' [class.is-invalid]='(confirmPassword.invalid || confirmPassword.errors?.notEqual) && confirmPassword.touched '
-          type="text" name="confirmPassword" appConfirmEqualValidator="password" required class="form-control" [(ngModel)]="employee.confirmPassword"
-          #confirmPassword="ngModel">
-        <span *ngIf="!confirmPassword.errors?.notEqual" class='invalid-feedback'>Confirm Password is invalid</span>
-        <span *ngIf="confirmPassword.errors?.notEqual" class='invalid-feedback'>Password and Confirm Password are not equal</span>
-        <span class='valid-feedback'>Confirm Password is valid</span>
+        <!-- Confirm Password -->
+        <div class="form-group">
+          <label [class.text-success]='confirmPassword.valid' [class.text-danger]='confirmPassword.invalid && confirmPassword.touched'
+            for="confirmPassword">Confirm
+            Password</label>
+          <input  [class.is-valid]='confirmPassword.valid && confirmPassword.touched' [class.is-invalid]='(confirmPassword.invalid || confirmPassword.errors?.notEqual) && confirmPassword.touched'
+            type="text" name="confirmPassword" appConfirmEqualValidator="password" required class="form-control"
+            [(ngModel)]="employee.confirmPassword" #confirmPassword="ngModel">
+          <span *ngIf="!confirmPassword.errors?.notEqual" class='invalid-feedback'>Confirm Password is invalid</span>
+          <span *ngIf="confirmPassword.errors?.notEqual" class='invalid-feedback'>Password and Confirm Password are not equal</span>
+          <span class='valid-feedback'>Confirm Password is valid</span>
+        </div>
       </div>
 
     </div>
