@@ -1,3 +1,4 @@
+import { EmployeeService } from './employees/employee.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
@@ -23,7 +24,7 @@ import { ConfirmEqualValidatorDirective } from './shared/confirm-equal-validator
     FormsModule,
     BsDatepickerModule.forRoot()
   ],
-  providers: [],
+  providers: [EmployeeService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
