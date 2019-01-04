@@ -1,5 +1,4 @@
 
-<h1 *ngIf="employeeFromChild">{{employeeFromChild?.name + ' - ' +  employeeFromChild?.gender}}</h1>
 <div *ngFor="let employee of employees">
-  <app-display-employee [employee]="employee" (notify)="handleNotify($event)" ></app-display-employee>
+    <app-display-employee [employee]="employee"></app-display-employee>
 </div>
