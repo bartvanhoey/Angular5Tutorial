@@ -1,15 +1,4 @@
 
-<!-- <h1 #h1Variable></h1>
 <div *ngFor="let employee of employees">
-  <div (click)='h1Variable.innerHTML = childComponent.employee.name + " " + childComponent.employee.gender'>
-    <app-display-employee [employee]="employee" #childComponent></app-display-employee>
-  </div>
-</div> -->
-
-
-<h1 #h1Variable></h1>
-<div *ngFor="let employee of employees">
-  <div (click)='h1Variable.innerHTML = childComponent.getEmployeeNameAndGender()'>
-    <app-display-employee [employee]="employee" #childComponent></app-display-employee>
-  </div>
+    <app-display-employee [employee]="employee"></app-display-employee>
 </div>
