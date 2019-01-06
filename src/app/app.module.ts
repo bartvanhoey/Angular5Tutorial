@@ -10,6 +10,7 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { SelectRequiredValidatorDirective } from './shared/select-required-validator.directive';
 import { ConfirmEqualValidatorDirective } from './shared/confirm-equal-validator.directive';
 import { DisplayEmployeeComponent } from './employees/display-employee.component';
+import { CreateEmployeeCanDeactivateGuardService } from './employees/create-employee-can-deactivate-guard.service';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,10 @@ import { DisplayEmployeeComponent } from './employees/display-employee.component
     FormsModule,
     BsDatepickerModule.forRoot()
   ],
-  providers: [EmployeeService],
+  providers: [
+    EmployeeService,
+    CreateEmployeeCanDeactivateGuardService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
