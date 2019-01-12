@@ -4,6 +4,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 
+
+
 @Component({
   templateUrl: './list-employees.component.html',
   styleUrls: ['./list-employees.component.css']
@@ -15,6 +17,7 @@ export class ListEmployeesComponent implements OnInit {
   constructor(private employeeService: EmployeeService, private _router: Router) { }
 
   ngOnInit() {
+
     this.employees = this.employeeService.getEmployees();
   }
 
