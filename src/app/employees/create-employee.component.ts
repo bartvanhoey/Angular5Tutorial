@@ -3,7 +3,7 @@ import { Employee } from './../models/employee.model';
 import { Department } from './../models/department.model';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
-import { Router} from '@angular/router';
+import { Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
 
 @Component({
@@ -16,14 +16,14 @@ export class CreateEmployeeComponent implements OnInit {
   previewPhoto = false;
   datePickerConfig: Partial<BsDatepickerConfig>;
   employee: Employee = {
-    id : null,
-    name : null,
-    gender : null,
-    contactPreference : null,
-    phoneNumber : null,
-    email : null,
-    dateOfBirth : null,
-    department : 'select',
+    id: null,
+    name: null,
+    gender: null,
+    contactPreference: null,
+    phoneNumber: null,
+    email: null,
+    dateOfBirth: null,
+    department: 'select',
     isActive: null,
     photoPath: null
   };
@@ -51,7 +51,10 @@ export class CreateEmployeeComponent implements OnInit {
   }
 
   saveEmployee(): void {
-    console.log('saveEmployee');
     this._employeeService.saveEmployee(this.employee);
+    this.createEmployeeForm.reset();
+    // set default values after form reset
+    // this.createEmployeeForm.reset({name: 'TestName', contactPref: 'phone'});
+     this._router.navigate(['list']);
   }
 }
