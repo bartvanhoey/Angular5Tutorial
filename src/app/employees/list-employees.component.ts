@@ -15,6 +15,13 @@ export class ListEmployeesComponent implements OnInit {
   employees: Employee[];
   searchTerm: string;
 
+  changeEmployeeName() {
+    //  this.employees[0].name = 'Jordan';
+    const newEmployeeArray: Employee[] = Object.assign([], this.employees);
+    newEmployeeArray[0].name = 'Jordan';
+    this.employees = newEmployeeArray;
+  }
+
   constructor(private employeeService: EmployeeService, private _router: Router) { }
 
   ngOnInit() {
