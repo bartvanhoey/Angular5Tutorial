@@ -51,7 +51,9 @@ export class CreateEmployeeComponent implements OnInit {
   }
 
   saveEmployee(): void {
-    this._employeeService.saveEmployee(this.employee);
+
+    const newEmployee: Employee = Object.assign({}, this.employee);
+    this._employeeService.saveEmployee(newEmployee);
     this.createEmployeeForm.reset();
     // set default values after form reset
     // this.createEmployeeForm.reset({name: 'TestName', contactPref: 'phone'});
