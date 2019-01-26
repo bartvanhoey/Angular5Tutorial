@@ -12,7 +12,8 @@ import { Router } from '@angular/router';
 })
 
 export class ListEmployeesComponent implements OnInit {
-  employees: Employee[] ;
+  employees: Employee[];
+  searchTerm: string;
 
   constructor(private employeeService: EmployeeService, private _router: Router) { }
 
