@@ -1,3 +1,4 @@
+import { EmployeeFilterPipe } from './employees/employee-filter.pipe';
 import { EmployeeService } from './employees/employee.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -21,7 +22,8 @@ import { EmployeeDetailsComponent } from './employees/employee-details.component
     SelectRequiredValidatorDirective,
     ConfirmEqualValidatorDirective,
     DisplayEmployeeComponent,
-    EmployeeDetailsComponent
+    EmployeeDetailsComponent,
+    EmployeeFilterPipe
   ],
   imports: [
     BrowserModule,
