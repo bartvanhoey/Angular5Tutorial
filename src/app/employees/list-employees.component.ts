@@ -10,15 +10,27 @@ import { Router } from '@angular/router';
 
 export class ListEmployeesComponent implements OnInit {
   employees: Employee[];
-  searchTerm: string;
+  filteredEmployees: Employee[];
+  private _searchTerm: string;
+
+  get searchTerm(): string {
+    return this._searchTerm;
+  }
+
+  set searchTerm(value: string) {
+    this._searchTerm = value;
+    this.filteredEmployees = this.filterEmployees(value);
+  }
+
+  filterEmployees(searchTerm: string): Employee[] {
+    return this.employees.filter(employee => employee.name.toLowerCase().indexOf(searchTerm.toLowerCase()) !== -1);
+  }
 
   constructor(private employeeService: EmployeeService, private _router: Router) { }
 
   changeEmployeeName() {
-      this.employees[0].name = 'Jordan';
-    // const newEmployeeArray: Employee[] = Object.assign([], this.employees);
-    // newEmployeeArray[0].name = 'Jordan';
-    // this.employees = newEmployeeArray;
+    this.employees[0].name = 'Jordan';
+    this.filteredEmployees = this.filterEmployees(this._searchTerm);
   }
 
   onMouseMove() {
@@ -26,8 +38,7 @@ export class ListEmployeesComponent implements OnInit {
   }
 
   ngOnInit() {
-
-    this.employees = this.employeeService.getEmployees();
+   this.filteredEmployees = this.employees = this.employeeService.getEmployees();
   }
 
   onClick(employeeId: number) {
