@@ -74,7 +74,7 @@
     </div>
   </div>
   <div class="card-footer text-muted bg-secondary">
-    <a href="" class="btn btn-primary" [routerLink]="['/list', {id: employee.id}]" routerLinkActive="router-link-active" >Back to List</a>
+    <a href="" class="btn btn-primary" [routerLink]="['/list', {id: employee.id}]" queryParamsHandling="merge" [queryParams]="{'newParam' : 'newValue'}" routerLinkActive="router-link-active" >Back to List</a>
     <button href="" class="btn btn-primary float-right" (click)='viewNextEmployee()'  >View Next Employee</button>
   </div>
 </div>

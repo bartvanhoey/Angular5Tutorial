@@ -33,16 +33,17 @@ export class ListEmployeesComponent implements OnInit {
     this.filteredEmployees = this.filterEmployees(this._searchTerm);
   }
 
-  onMouseMove() {
-    console.log('mouseMove: ');
-  }
+  // onMouseMove() {
+  //   console.log('mouseMove: ');
+  // }
 
   ngOnInit() {
    this.filteredEmployees = this.employees = this.employeeService.getEmployees();
   }
 
   onClick(employeeId: number) {
-    this._router.navigate(['/employees', employeeId]);
+    this._router.navigate(['/employees', employeeId],
+     { queryParams: { 'searchTerm' : this._searchTerm, 'testParam' : 'testValue' }});
   }
 
 }
