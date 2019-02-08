@@ -1,7 +1,7 @@
 import { EmployeeService } from './employee.service';
 import { Employee } from './../models/employee.model';
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   templateUrl: './list-employees.component.html',
@@ -26,7 +26,7 @@ export class ListEmployeesComponent implements OnInit {
     return this.employees.filter(employee => employee.name.toLowerCase().indexOf(searchTerm.toLowerCase()) !== -1);
   }
 
-  constructor(private employeeService: EmployeeService, private _router: Router) { }
+  constructor(private _route: ActivatedRoute, private _employeeService: EmployeeService, private _router: Router) { }
 
   changeEmployeeName() {
     this.employees[0].name = 'Jordan';
@@ -38,12 +38,29 @@ export class ListEmployeesComponent implements OnInit {
   // }
 
   ngOnInit() {
-   this.filteredEmployees = this.employees = this.employeeService.getEmployees();
+    this.filteredEmployees = this.employees = this._employeeService.getEmployees();
+    // query params
+    //  console.log('has: ' ,  this._route.snapshot.queryParamMap.has('searchTerm'));
+    //  console.log('get: ' ,  this._route.snapshot.queryParamMap.get('searchTerm'));
+    //  console.log('getAll: ' ,  this._route.snapshot.queryParamMap.getAll('searchTerm'));
+    //  console.log('keys: ' ,  this._route.snapshot.queryParamMap.keys);
+
+    // params
+    // console.log('has: ' ,  this._route.snapshot.paramMap.has('searchTerm'));
+    // console.log('get: ' ,  this._route.snapshot.paramMap.get('searchTerm'));
+    // console.log('getAll: ' ,  this._route.snapshot.paramMap.getAll('searchTerm'));
+    // console.log('keys: ' ,  this._route.snapshot.paramMap.keys);
+
+    if (this._route.snapshot.queryParamMap.has('searchTerm')) {
+      this.searchTerm = this._route.snapshot.queryParamMap.get('searchTerm');
+    } else {
+      this.filteredEmployees = this.employees;
+    }
   }
 
   onClick(employeeId: number) {
     this._router.navigate(['/employees', employeeId],
-     { queryParams: { 'searchTerm' : this._searchTerm, 'testParam' : 'testValue' }});
+      { queryParams: { 'searchTerm': this._searchTerm, 'testParam': 'testValue' } });
   }
 
 }
