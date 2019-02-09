@@ -33,34 +33,19 @@ export class ListEmployeesComponent implements OnInit {
     this.filteredEmployees = this.filterEmployees(this._searchTerm);
   }
 
-  // onMouseMove() {
-  //   console.log('mouseMove: ');
-  // }
-
   ngOnInit() {
-    this.filteredEmployees = this.employees = this._employeeService.getEmployees();
-    // query params
-    //  console.log('has: ' ,  this._route.snapshot.queryParamMap.has('searchTerm'));
-    //  console.log('get: ' ,  this._route.snapshot.queryParamMap.get('searchTerm'));
-    //  console.log('getAll: ' ,  this._route.snapshot.queryParamMap.getAll('searchTerm'));
-    //  console.log('keys: ' ,  this._route.snapshot.queryParamMap.keys);
-
-    // params
-    // console.log('has: ' ,  this._route.snapshot.paramMap.has('searchTerm'));
-    // console.log('get: ' ,  this._route.snapshot.paramMap.get('searchTerm'));
-    // console.log('getAll: ' ,  this._route.snapshot.paramMap.getAll('searchTerm'));
-    // console.log('keys: ' ,  this._route.snapshot.paramMap.keys);
-
-    if (this._route.snapshot.queryParamMap.has('searchTerm')) {
-      this.searchTerm = this._route.snapshot.queryParamMap.get('searchTerm');
-    } else {
-      this.filteredEmployees = this.employees;
-    }
+    this._employeeService.getEmployees().subscribe(employees => {
+      this.employees = employees;
+      if (this._route.snapshot.queryParamMap.has('searchTerm')) {
+        this.searchTerm = this._route.snapshot.queryParamMap.get('searchTerm');
+      } else {
+        this.filteredEmployees = this.employees;
+      }
+    });
   }
 
   onClick(employeeId: number) {
     this._router.navigate(['/employees', employeeId],
       { queryParams: { 'searchTerm': this._searchTerm, 'testParam': 'testValue' } });
   }
-
 }
