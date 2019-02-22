@@ -13,6 +13,7 @@ import { ConfirmEqualValidatorDirective } from './shared/confirm-equal-validator
 import { DisplayEmployeeComponent } from './employees/display-employee.component';
 import { CreateEmployeeCanDeactivateGuardService } from './employees/create-employee-can-deactivate-guard.service';
 import { EmployeeDetailsComponent } from './employees/employee-details.component';
+import { EmployeeListResolverService } from './employees/employee-list-resolver.service';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { EmployeeDetailsComponent } from './employees/employee-details.component
   ],
   providers: [
     EmployeeService,
-    CreateEmployeeCanDeactivateGuardService
+    CreateEmployeeCanDeactivateGuardService,
+    EmployeeListResolverService
   ],
   bootstrap: [AppComponent]
 })

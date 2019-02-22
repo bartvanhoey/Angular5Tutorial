@@ -4,11 +4,13 @@ import { NgModule, Component } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { ListEmployeesComponent } from './employees/list-employees.component';
 import { CreateEmployeeCanDeactivateGuardService } from './employees/create-employee-can-deactivate-guard.service';
+import { EmployeeListResolverService } from './employees/employee-list-resolver.service';
 
 const routes: Routes = [
   {
     path: 'list',
-    component: ListEmployeesComponent
+    component: ListEmployeesComponent,
+    resolve: {employeeList: EmployeeListResolverService}
   },
   {
     path: 'create',
