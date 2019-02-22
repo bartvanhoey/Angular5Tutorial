@@ -1,4 +1,3 @@
-import { EmployeeService } from './employee.service';
 import { Employee } from './../models/employee.model';
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -13,6 +12,15 @@ export class ListEmployeesComponent implements OnInit {
   filteredEmployees: Employee[];
   private _searchTerm: string;
 
+  constructor(private _route: ActivatedRoute, private _router: Router) {
+    this.employees = _route.snapshot.data['employeeList'];
+    if (this._route.snapshot.queryParamMap.has('searchTerm')) {
+      this.searchTerm = this._route.snapshot.queryParamMap.get('searchTerm');
+    } else {
+      this.filteredEmployees = this.employees;
+    }
+  }
+
   get searchTerm(): string {
     return this._searchTerm;
   }
@@ -26,7 +34,6 @@ export class ListEmployeesComponent implements OnInit {
     return this.employees.filter(employee => employee.name.toLowerCase().indexOf(searchTerm.toLowerCase()) !== -1);
   }
 
-  constructor(private _route: ActivatedRoute, private _employeeService: EmployeeService, private _router: Router) { }
 
   changeEmployeeName() {
     this.employees[0].name = 'Jordan';
@@ -34,14 +41,6 @@ export class ListEmployeesComponent implements OnInit {
   }
 
   ngOnInit() {
-    this._employeeService.getEmployees().subscribe(employees => {
-      this.employees = employees;
-      if (this._route.snapshot.queryParamMap.has('searchTerm')) {
-        this.searchTerm = this._route.snapshot.queryParamMap.get('searchTerm');
-      } else {
-        this.filteredEmployees = this.employees;
-      }
-    });
   }
 
   onClick(employeeId: number) {
