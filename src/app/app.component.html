@@ -17,6 +17,7 @@
       </div>
     </nav>
     <br>
+    <div *ngIf="showLoadingIndicator" class="spinner"></div>
     <div style="padding: 5px;">
       <router-outlet></router-outlet>
     </div>
