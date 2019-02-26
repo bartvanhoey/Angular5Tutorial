@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Event, Router, NavigationStart, NavigationEnd, NavigationError, NavigationCancel } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,23 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'Angular5Project';
+  showLoadingIndicator = true;
+
+  constructor(private _router: Router) {
+    this._router.events.subscribe((routerEvent: Event) => {
+      if (routerEvent instanceof NavigationStart) {
+        // loading.io
+        console.log('instanceof NavigationStart');
+        this.showLoadingIndicator = true;
+      }
+      if (routerEvent instanceof NavigationEnd ||
+        routerEvent instanceof NavigationCancel ||
+        routerEvent instanceof NavigationError
+      ) {
+        console.log('instanceof NavigationEnd');
+        this.showLoadingIndicator = false;
+      }
+    });
+  }
+
 }
