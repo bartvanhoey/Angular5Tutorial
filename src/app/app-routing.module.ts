@@ -5,6 +5,8 @@ import { Routes, RouterModule } from '@angular/router';
 import { ListEmployeesComponent } from './employees/list-employees.component';
 import { CreateEmployeeCanDeactivateGuardService } from './employees/create-employee-can-deactivate-guard.service';
 import { EmployeeListResolverService } from './employees/employee-list-resolver.service';
+import { PageNotFoundComponent } from './page-not-found.component';
+import { EmployeeDetailsGuardService } from './employees/employee-details-guard.service';
 
 const routes: Routes = [
   {
@@ -19,7 +21,12 @@ const routes: Routes = [
   },
   {
     path: 'employees/:id',
-    component: EmployeeDetailsComponent
+    component: EmployeeDetailsComponent,
+    canActivate: [EmployeeDetailsGuardService]
+  },
+  {
+    path: 'notfound',
+    component: PageNotFoundComponent
   },
   {
     path: '',
