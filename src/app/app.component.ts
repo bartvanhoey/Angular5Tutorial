@@ -13,14 +13,14 @@ export class AppComponent {
     this._router.events.subscribe((routerEvent: Event) => {
       if (routerEvent instanceof NavigationStart) {
         // loading.io
-        console.log('instanceof NavigationStart');
+        // console.log('instanceof NavigationStart');
         this.showLoadingIndicator = true;
       }
       if (routerEvent instanceof NavigationEnd ||
         routerEvent instanceof NavigationCancel ||
         routerEvent instanceof NavigationError
       ) {
-        console.log('instanceof NavigationEnd');
+        // console.log('instanceof NavigationEnd');
         this.showLoadingIndicator = false;
       }
     });
