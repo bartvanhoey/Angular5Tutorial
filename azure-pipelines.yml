@@ -24,3 +24,9 @@ steps:
 
 - task: ArchiveFiles@2
   displayName: 'Archive $(Build.BinariesDirectory)'
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    pathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    artifactName: drop1
+    
