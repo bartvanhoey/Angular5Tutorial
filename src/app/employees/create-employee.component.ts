@@ -3,7 +3,7 @@ import { Employee } from './../models/employee.model';
 import { Department } from './../models/department.model';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { NgForm } from '@angular/forms';
 
 @Component({
@@ -36,7 +36,7 @@ export class CreateEmployeeComponent implements OnInit {
     { id: 5, name: 'Administration' }
   ];
 
-  constructor(private _employeeService: EmployeeService, private _router: Router) {
+  constructor(private _route: ActivatedRoute, private _employeeService: EmployeeService, private _router: Router) {
     this.datePickerConfig = Object.assign({}, {
       containerClass: 'theme-dark-blue',
       dateInputFormat: 'DD/MM/YYYY',
@@ -48,6 +48,32 @@ export class CreateEmployeeComponent implements OnInit {
   }
 
   ngOnInit() {
+    this._route.paramMap.subscribe(parameterMap => {
+      const id = +parameterMap.get('id');
+      this.getEmployee(id);
+    });
+  }
+  private getEmployee(id: number): any {
+    if (id === 0) {
+      this.employee  = {
+        id: null,
+        name: null,
+        gender: null,
+        contactPreference: null,
+        phoneNumber: null,
+        email: null,
+        dateOfBirth: null,
+        department: 'select',
+        isActive: null,
+        photoPath: null
+      };
+      this.createEmployeeForm.reset();
+    } else {
+        this.employee = Object.assign({}, this._employeeService.getEmployee(id));
+    }
+
+
+
   }
 
   saveEmployee(): void {
@@ -57,6 +83,6 @@ export class CreateEmployeeComponent implements OnInit {
     this.createEmployeeForm.reset();
     // set default values after form reset
     // this.createEmployeeForm.reset({name: 'TestName', contactPref: 'phone'});
-     this._router.navigate(['list']);
+    this._router.navigate(['list']);
   }
 }
