@@ -59,12 +59,12 @@
         <div class="custom-control-inline"><label [class.text-success]='gender.valid' [class.text-danger]='gender.invalid && gender.touched'>Gender</label></div>
         <div class="custom-control custom-radio custom-control-inline">
           <input [class.is-invalid]="gender.invalid && gender.touched" #gender="ngModel" type="radio" required id="male"
-            name="gender" value="Male" [(ngModel)]="employee.gender" class="custom-control-input">
+            name="gender" value="male" [(ngModel)]="employee.gender" class="custom-control-input">
           <label for="male" class="custom-control-label">male</label>
         </div>
         <div class="custom-control custom-radio custom-control-inline">
           <input [class.is-invalid]="gender.invalid && gender.touched" #gender="ngModel" type="radio" required id="female"
-            name="gender" value="Female" [(ngModel)]="employee.gender" class="custom-control-input">
+            name="gender" value="female" [(ngModel)]="employee.gender" class="custom-control-input">
           <label for="female" class="custom-control-label">female</label>
           <span class="invalid-feedback">&nbsp; &nbsp; Gender is required</span>
         </div>
