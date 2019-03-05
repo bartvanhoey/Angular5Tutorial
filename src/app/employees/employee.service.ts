@@ -42,7 +42,6 @@ export class EmployeeService {
   constructor() { }
 
   getEmployees(): Observable<Employee[]> {
-
         return of(this.listEmployees).pipe(delay(2000)) ;
   }
 
@@ -52,10 +51,14 @@ export class EmployeeService {
 
   saveEmployee(employee: Employee) {
     if (employee.id === null) {
+     const maxId =  this.listEmployees.reduce( (emp1, emp2) => {
+        return (emp1.id > emp2.id) ? emp1 : emp2;
+      }).id;
+      employee.id = maxId + 1;
       this.listEmployees.push(employee);
     } else {
-      const index = this.listEmployees.findIndex(emp => emp.id === employee.id);
-      this.listEmployees[index] = employee;
+      const foundIndex = this.listEmployees.findIndex(emp => emp.id === employee.id);
+      this.listEmployees[foundIndex] = employee;
     }
   }
 

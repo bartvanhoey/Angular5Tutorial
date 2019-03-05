@@ -1,7 +1,7 @@
 <form #employeeForm="ngForm" (ngSubmit)='saveEmployee()'>
   <div class="card">
     <div class="card-header">
-      Create Employee
+     {{componentTitle}}
     </div>
     <!-- Full Name -->
     <div class="card-body">
@@ -114,11 +114,11 @@
           placeholder="Enter photo path ...">
       </div>
       <div class="form-group">
-        <button type="button" class="btn btn-primary" (click)='togglePreview()'> {{previewPhoto ? 'Hide Preview' :
+        <button type="button" class="btn btn-primary" (click)='togglePreview()' *ngIf="employee.photoPath !== '' && employee.photoPath !== null" > {{previewPhoto ? 'Hide Preview' :
           'Show Preview' }} </button>
       </div>
       <div class="form-group">
-        <img [src]="employee.photoPath" height="200" width="200" *ngIf="previewPhoto">
+        <img [src]="employee.photoPath" height="200" width="200" *ngIf="previewPhoto && employee.photoPath !== '' && employee.photoPath !== null">
       </div>
 
       <div ngModelGroup="passwordGroup" [class.is-invalid]='(confirmPassword.invalid || confirmPassword.errors?.notEqual) && confirmPassword.touched'>

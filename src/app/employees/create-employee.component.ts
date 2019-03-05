@@ -14,6 +14,7 @@ import { NgForm } from '@angular/forms';
 export class CreateEmployeeComponent implements OnInit {
   @ViewChild('employeeForm') public createEmployeeForm: NgForm;
   previewPhoto = false;
+  componentTitle: string;
   datePickerConfig: Partial<BsDatepickerConfig>;
   employee: Employee = {
     id: null,
@@ -53,9 +54,10 @@ export class CreateEmployeeComponent implements OnInit {
       this.getEmployee(id);
     });
   }
+
   private getEmployee(id: number): any {
     if (id === 0) {
-      this.employee  = {
+      this.employee = {
         id: null,
         name: null,
         gender: null,
@@ -67,17 +69,15 @@ export class CreateEmployeeComponent implements OnInit {
         isActive: null,
         photoPath: null
       };
+      this.componentTitle = 'Create Employee';
       this.createEmployeeForm.reset();
     } else {
-        this.employee = Object.assign({}, this._employeeService.getEmployee(id));
+      this.componentTitle = 'Edit Employee';
+      this.employee = Object.assign({}, this._employeeService.getEmployee(id));
     }
-
-
-
   }
 
   saveEmployee(): void {
-
     const newEmployee: Employee = Object.assign({}, this.employee);
     this._employeeService.saveEmployee(newEmployee);
     this.createEmployeeForm.reset();
