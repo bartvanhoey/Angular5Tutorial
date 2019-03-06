@@ -37,4 +37,10 @@ export class ListEmployeesComponent implements OnInit {
   ngOnInit() {
   }
 
+  onDeleteNotification(id: number) {
+    const index = this.filteredEmployees.findIndex(e => e.id === id);
+    if (index !== -1) {
+      this.filteredEmployees.splice(index, 1);
+    }
+  }
 }
