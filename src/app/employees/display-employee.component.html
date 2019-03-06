@@ -1,5 +1,6 @@
 <div class="card  mb-3">
-  <div class="card-header text-white" [ngStyle]="{'background-color': (selectedEmployeeId === employee.id) ? 'green' : 'blue'}" >
+  <div class="card-header text-white"
+    [ngStyle]="{'background-color': (selectedEmployeeId === employee.id) ? 'green' : 'blue'}">
     <h3 class="card-title"> {{employee.name}}</h3>
   </div>
   <div class="card-body">
@@ -51,7 +52,7 @@
           </div>
           <div class="row">
             <div class="col-xs-6">
-              Department: 
+              Department:
             </div>
             <div class="col-xs-6" [ngSwitch]="employee.department">
               <p *ngSwitchCase="1"> Help Desk</p>
@@ -75,8 +76,12 @@
   </div>
   <div class="card-footer text-muted">
     <button class="btn btn-primary" (click)='viewEmployee()'>View</button>
-    <button class="btn btn-primary" (click)='editEmployee()' >Edit</button>
-    <button class="btn btn-danger">Delete</button>
-
+    <button class="btn btn-primary" (click)='editEmployee()'>Edit</button>
+    <span *ngIf="confirmDelete">
+      <span>Are you sure you want to Delete?</span>
+      <button class="btn btn-danger" (click)='deleteEmployee()'>Yes</button>
+      <button class="btn btn-primary" (click)='confirmDelete=false'>No</button>
+    </span>
+    <button *ngIf="!confirmDelete" class="btn btn-danger" (click)='confirmDelete=true'>Delete</button>
   </div>
 </div>
