@@ -9,11 +9,12 @@ import { EmployeeService } from './employee.service';
   styleUrls: ['./display-employee.component.css']
 })
 export class DisplayEmployeeComponent implements OnInit {
+  private selectedEmployeeId: number;
   @Input() employee: Employee;
   @Input() searchTerm: string;
   @Output() notifyDelete: EventEmitter<number> = new EventEmitter<number>();
   confirmDelete = false;
-  selectedEmployeeId: number;
+  isHidden = false;
 
   constructor(private _employeeService: EmployeeService, private _route: ActivatedRoute, private _router: Router) { }
 
