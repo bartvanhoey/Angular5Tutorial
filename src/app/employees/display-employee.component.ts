@@ -33,8 +33,5 @@ export class DisplayEmployeeComponent implements OnInit {
   deleteEmployee() {
     this._employeeService.deleteEmployee(this.employee.id);
     this.notifyDelete.emit(this.employee.id);
-    
-    console.log('description: ' );
-    
   }
 }
