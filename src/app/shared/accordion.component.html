@@ -1,0 +1,13 @@
+<div class="card  mb-3">
+  <div (click)='isHidden = !isHidden' class="card-header text-white pointer-cursor"
+    [ngStyle]="{'background-color': (hasJustViewed) ? 'green' : 'blue'}">
+    <h3 class="card-title"> {{ title | uppercase }}</h3>
+  </div>
+  <div [hidden]="isHidden" class="card-body">
+    <div class="col-xs-10">
+      <ng-content select=".my-panel-body"></ng-content>
+    </div>
+  </div>
+  <div [hidden]="isHidden" class="card-footer text-muted">
+    <ng-content select=".my-panel-footer"></ng-content>
+  </div>
