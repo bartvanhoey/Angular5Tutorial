@@ -17,6 +17,7 @@ import { EmployeeListResolverService } from './employees/employee-list-resolver.
 import { PageNotFoundComponent } from './page-not-found.component';
 import { EmployeeDetailsGuardService } from './employees/employee-details-guard.service';
 import { AccordionComponent } from './shared/accordion.component';
+import { HttpClientModule} from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { AccordionComponent } from './shared/accordion.component';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    BsDatepickerModule.forRoot()
+    HttpClientModule,
+    BsDatepickerModule.forRoot(),
   ],
   providers: [
     EmployeeService,

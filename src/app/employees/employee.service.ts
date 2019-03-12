@@ -2,6 +2,7 @@ import { Employee } from './../models/employee.model';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { delay } from 'rxjs/operators';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable()
 export class EmployeeService {
@@ -11,7 +12,7 @@ export class EmployeeService {
     gender: 'male',
     contactPreference: 'email',
     email: 'mark@pragimtech.com',
-    dateOfBirth: new Date('10/25/1988'),
+    dateOfBirth: '1988/10/25',
     department: '3',
     isActive: true,
     photoPath: 'assets/images/mark.png'
@@ -22,7 +23,7 @@ export class EmployeeService {
     gender: 'female',
     contactPreference: 'phone',
     phoneNumber: 2345978640,
-    dateOfBirth: new Date('11/20/1979'),
+    dateOfBirth: '1979/11/20',
     department: '2',
     isActive: true,
     photoPath: 'assets/images/mary.png'
@@ -33,16 +34,16 @@ export class EmployeeService {
     gender: 'male',
     contactPreference: 'phone',
     phoneNumber: 5432978640,
-    dateOfBirth: new Date('3/25/1976'),
+    dateOfBirth: '1976/3/25',
     department: '3',
     isActive: false,
     photoPath: 'assets/images/john.png'
   }];
 
-  constructor() { }
+  constructor(private _http: HttpClient) { }
 
   getEmployees(): Observable<Employee[]> {
-        return of(this.listEmployees).pipe(delay(2000)) ;
+      return this._http.get<Employee[]>('http://localhost:3000/employees');
   }
 
   getEmployee(id: number): Employee {
