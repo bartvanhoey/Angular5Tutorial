@@ -15,12 +15,12 @@ export class ListEmployeesComponent implements OnInit {
   private _searchTerm: string;
 
   constructor(private _route: ActivatedRoute, private _router: Router) {
-    const resolvedEmployeeList: ResolvedEmployeeList = _route.snapshot.data['employeeList'];
+    const resolvedData: Employee[] | string = _route.snapshot.data['employeeList'];
 
-    if (resolvedEmployeeList.error === null) {
-      this.employees = resolvedEmployeeList.employeeList;
+    if (Array.isArray(resolvedData)) {
+      this.employees = resolvedData;
     } else {
-        this.error = resolvedEmployeeList.error;
+        this.error = resolvedData;
     }
 
     if (this._route.snapshot.queryParamMap.has('searchTerm')) {
