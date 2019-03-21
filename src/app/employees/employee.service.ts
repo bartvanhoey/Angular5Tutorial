@@ -1,8 +1,8 @@
 import { Employee } from './../models/employee.model';
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
-import { delay } from 'rxjs/operators';
-import { HttpClient } from '@angular/common/http';
+import { Observable, of, throwError } from 'rxjs';
+import { delay, catchError } from 'rxjs/operators';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 
 @Injectable()
 export class EmployeeService {
@@ -43,7 +43,8 @@ export class EmployeeService {
   constructor(private _http: HttpClient) { }
 
   getEmployees(): Observable<Employee[]> {
-      return this._http.get<Employee[]>('http://localhost:3000/employees');
+      return this._http.get<Employee[]>('http://localhost:3000/employees1')
+      .pipe(catchError(this.handleError));
   }
 
   getEmployee(id: number): Employee {
@@ -68,5 +69,14 @@ export class EmployeeService {
     if (index !== -1) {
       this.listEmployees.splice(index, 1);
     }
+  }
+
+  private handleError(errorResponse: HttpErrorResponse) {
+    if (errorResponse.error instanceof ErrorEvent) {
+      console.log('Client Side Error: ' ,  errorResponse.error.message);
+    } else {
+      console.log('Server Side Error: ' ,  errorResponse);
+    }
+    return throwError('There is a problem with the service. We are notified & working on it. Please try again later.');
   }
 }
